@@ -1,3 +1,5 @@
 /.vscode
 /planning
 /node_modules
+
+.env
