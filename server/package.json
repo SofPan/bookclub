@@ -26,5 +26,9 @@
     "ts-node": "^10.9.2",
     "typeorm": "^0.3.27",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "cors": "^2.8.5"
   }
 }

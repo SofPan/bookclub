@@ -6,6 +6,6 @@ export const getAllBooks = () => {
   `
   return AppDataSource.query(query)
     .then(results => {
-      console.log("db results: ", results)
+      return results;
     }).catch(error => console.error("Error fetching books", error));
 }

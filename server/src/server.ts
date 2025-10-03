@@ -1,9 +1,14 @@
 import express from 'express';
+import cors from 'cors';
 import { AppDataSource } from './data-source.ts';
 import routes from '../routes/index.ts';
 
 const app = express();
 const port = process.env.PORT;
+
+app.use(cors({
+            origin: 'http://localhost:3000'
+        }));
 
 app.use('/api', routes);
 
