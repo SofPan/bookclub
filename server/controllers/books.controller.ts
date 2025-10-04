@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import {getAllBooks, getOneBookById} from '../models/queries/books/getBooks.ts';
+import {getAllBooks, getOneBookById, getReviewsForOneBook} from '../models/queries/books/getBooks.ts';
 
 /*
   Test Path, to be converted to a keyword search path 
@@ -9,23 +9,31 @@ import {getAllBooks, getOneBookById} from '../models/queries/books/getBooks.ts';
 export const getBooks = async (req: Request, res: Response) => {
   getAllBooks()
   .then(books => {
-    console.log('inside getBooks', books);
     res.json(books);
   }).catch(error => console.error('Error in Books controller', error));
 };
 
 /*
-  Get book details by ID
+  GET book details by ID
 */
 export const getBookById = (req: Request, res: Response) => {
   const { id } = req.params;
   getOneBookById(id)
   .then(book => {
-    console.log("One book", book);
     res.json(book);
-  })
-  .catch(error => console.error('Error in controller', error));
+  }).catch(error => console.error('Error in controller', error));
 };
+
+/*
+  GET reviews for a book
+*/
+export const getBookReviews = (req: Request, res: Response) => {
+  const {id} = req.params;
+  getReviewsForOneBook(id)
+  .then(reviews => {
+    res.json(reviews);
+  }).catch(error => console.error('Error in controller', error));
+}
 
 export const createBook = (req: Request, res: Response) => {
   res.status(201).json({ message: 'Book created' });

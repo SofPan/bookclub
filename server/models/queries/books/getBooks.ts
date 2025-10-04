@@ -21,3 +21,15 @@ export const getOneBookById = (id:string) => {
     .then(results => results[0])
     .catch(error => console.error(`Error fetching book with id ${id}`, error))
 }
+
+export const getReviewsForOneBook = (id:string) => {
+  const values = [id];
+  const query = `
+    SELECT * FROM reviews
+    WHERE book_id=$1;
+  `
+
+  return AppDataSource.query(query, values)
+    .then(results => results)
+    .catch(error => console.error(`Error fetching review with book id ${id}`, error))
+}
