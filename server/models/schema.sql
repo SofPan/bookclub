@@ -32,7 +32,7 @@ CREATE TABLE books (
     author TEXT NOT NULL,
     cover_url TEXT,
     synopsis TEXT,
-    avg_rating_cache DECIMAL(2,1), -- optional cached average rating
+    avg_rating_cache DECIMAL(2,1) DEFAULT 0, -- optional cached average rating
     created_at TIMESTAMP DEFAULT NOW()
 );
 

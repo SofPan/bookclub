@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 
 import {getAllBooks, getOneBookById, getReviewsForOneBook} from '../models/queries/books/getBooks.ts';
+import {createNewBook} from '../models/queries/books/postBooks.ts';
 
 /*
   Test Path, to be converted to a keyword search path 
@@ -36,5 +37,10 @@ export const getBookReviews = (req: Request, res: Response) => {
 }
 
 export const createBook = (req: Request, res: Response) => {
-  res.status(201).json({ message: 'Book created' });
+  const bookValues = req.body;
+  createNewBook(bookValues)
+  .then(result => {
+    console.log("result of creating a new book", result);
+    res.status(201).json(result);
+  }).catch(error => console.error("Error createBook", error));
 };

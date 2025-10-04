@@ -10,10 +10,10 @@ app.use(cors({
             origin: 'http://localhost:3000'
         }));
 
-app.use('/api', routes);
-
+        
 AppDataSource.initialize().then(() => {
   app.use(express.json())
+  app.use('/api', routes);
   app.get('/', (req, res) => {
     return res.json('Established connection!');
   })
