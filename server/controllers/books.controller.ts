@@ -35,12 +35,20 @@ export const getBookReviews = (req: Request, res: Response) => {
     res.json(reviews);
   }).catch(error => console.error('Error in controller', error));
 }
-
+/*
+  POST book to DB
+*/ 
 export const createBook = (req: Request, res: Response) => {
   const bookValues = req.body;
   createNewBook(bookValues)
-  .then(result => {
-    console.log("result of creating a new book", result);
-    res.status(201).json(result);
+  .then(() => {
+    res.status(201).json();
   }).catch(error => console.error("Error createBook", error));
 };
+
+/*
+  The preference is not to have any UPDATE/DELETE Book API
+  requests because these changes update to all users.
+
+  User routes will handle an individual's updates/deletes.
+*/
