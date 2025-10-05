@@ -2,19 +2,44 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+const URL = `http://localhost:${process.env.HOST}/api/reviews/`;
+const TEST_UID = 6;
+const TEST_BOOK_ID= 5;
+
 export default function Home() {
 
-  const handleClick = async() => {
-    console.log("clicked the button!");
+  const handlePost = async() => {
     const reqValues = {
-      external_api_id: "TestID1",
-      title: "Test Title",
-      author: "Test Author",
-      cover_url: "test url",
-      synopsis: "Love this test!"
+      user_id: TEST_UID,
+      book_id: TEST_BOOK_ID,
+      rating: 4.5,
+      content: "Test book was so good!"
     }
 
-    await axios.post("http://localhost:5500/api/books/", reqValues)
+    await axios.post(URL, reqValues)
+      .then(response => {
+        console.log(response);
+      }).catch(error => {
+        console.log(error);
+      });
+  };
+
+  const handlePut = async() => {
+      const reqValues = {
+        rating: 2,
+        content: "Actually, I didn't like it after all"
+      }
+
+      await axios.put(`http://localhost:5500/api/reviews/1`, reqValues)
+        .then(response => {
+          console.log(response);
+        }).catch(error => {
+          console.log(error);
+        });
+    };
+
+  const handleDelete = async() => {
+    await axios.delete(`http://localhost:5500/api/reviews/1`)
       .then(response => {
         console.log(response);
       }).catch(error => {
@@ -26,7 +51,9 @@ export default function Home() {
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1>Testing Routes!</h1>
-        <button onClick={handleClick}>Testing Post Book Route!</button>
+        <button className="border border-solid" onClick={handlePost}>Testing Post</button>
+        <button className="border border-solid" onClick={handlePut}>Testing Put</button>
+        <button className="border border-solid" onClick={handleDelete}>Testing Delete</button>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
 
