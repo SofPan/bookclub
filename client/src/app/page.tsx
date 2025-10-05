@@ -1,20 +1,18 @@
 'use client'
 import axios from "axios";
-import { useEffect, useState } from "react";
 
 const URL = `http://localhost:5500/api`;
-const TEST_ID = 1;
+const TEST_ID = 2;
 
 export default function Home() {
 
   const handlePost = async() => {
     const reqValues = {
-      name: 'TEST NAME',
-      description: 'Test description',
-      created_by: TEST_ID,
+      user_id: TEST_ID,
+      role: 'member'
     }
 
-    await axios.post(`${URL}/clubs/`, reqValues)
+    await axios.post(`${URL}/clubs/1/members/`, reqValues)
       .then(response => {
         console.log(response);
       }).catch(error => {
@@ -24,11 +22,10 @@ export default function Home() {
 
   const handlePut = async() => {
       const reqValues = {
-        name: 'A whole new name',
-        description: 'A whole fantastic club to see'
+        role: 'admin'
       }
 
-      await axios.put(`${URL}/clubs/1`, reqValues)
+      await axios.put(`${URL}/clubs/1/members/${TEST_ID}`, reqValues)
         .then(response => {
           console.log(response);
         }).catch(error => {
@@ -37,7 +34,7 @@ export default function Home() {
     };
 
   const handleDelete = async() => {
-    await axios.delete(`${URL}/clubs/1`)
+    await axios.delete(`${URL}/clubs/1/members/${TEST_ID}`)
       .then(response => {
         console.log(response);
       }).catch(error => {

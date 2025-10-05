@@ -93,6 +93,7 @@ CREATE TABLE club_members (
     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     role member_role DEFAULT 'member',
     joined_at TIMESTAMP DEFAULT NOW(),
+    updated_at TIMESTAMP DEFAULT NOW(),
     UNIQUE (club_id, user_id) -- one membership per user per club
 );
 
