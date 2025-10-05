@@ -1,25 +1,25 @@
 -- =========================================
 -- USERS
 -- =========================================
-INSERT INTO users (id, name, email, password_hash, avatar_url)
+INSERT INTO users (name, email, password_hash, avatar_url)
 VALUES
-  (1, 'Alice Johnson', 'alice@example.com', 'hashed_pw_1', 'https://example.com/avatar1.png'),
-  (2, 'Brian Smith', 'brian@example.com', 'hashed_pw_2', 'https://example.com/avatar2.png'),
-  (3, 'Chloe Lee', 'chloe@example.com', 'hashed_pw_3', 'https://example.com/avatar3.png'),
-  (4, 'Diego Ramirez', 'diego@example.com', 'hashed_pw_4', NULL),
-  (5, 'Ella Thompson', 'ella@example.com', 'hashed_pw_5', NULL),
-  (6, 'Test User', 'test@example.com', 'test_pw', 'https://example.com/test.png');
+  ('Alice Johnson', 'alice@example.com', 'hashed_pw_1', 'https://example.com/avatar1.png'),
+  ('Brian Smith', 'brian@example.com', 'hashed_pw_2', 'https://example.com/avatar2.png'),
+  ('Chloe Lee', 'chloe@example.com', 'hashed_pw_3', 'https://example.com/avatar3.png'),
+  ('Diego Ramirez', 'diego@example.com', 'hashed_pw_4', NULL),
+  ('Ella Thompson', 'ella@example.com', 'hashed_pw_5', NULL),
+  ('Test User', 'test@example.com', 'test_pw', 'https://example.com/test.png');
 
 -- =========================================
 -- BOOKS
 -- =========================================
-INSERT INTO books (id, external_api_id, title, author, cover_url, synopsis, avg_rating_cache)
+INSERT INTO books (external_api_id, title, author, cover_url, synopsis, avg_rating_cache)
 VALUES
-  (1, 'OL123M', 'The Great Gatsby', 'F. Scott Fitzgerald', 'https://example.com/gatsby.jpg', 'A story of wealth, love, and tragedy in 1920s America.', 4.1),
-  (2, 'OL456M', 'Pride and Prejudice', 'Jane Austen', 'https://example.com/pride.jpg', 'A classic romance exploring class, family, and first impressions.', 4.6),
-  (3, 'OL789M', 'The Hobbit', 'J.R.R. Tolkien', 'https://example.com/hobbit.jpg', 'Bilbo Baggins embarks on an unexpected adventure with dwarves.', 4.8),
-  (4, 'OL101M', '1984', 'George Orwell', 'https://example.com/1984.jpg', 'A dystopian novel about totalitarianism and surveillance.', 4.4),
-  (5, 'TEST1', 'Test', 'Test Author', 'https://example.com/test', 'A test book for testing tests', 0);
+  ('OL123M', 'The Great Gatsby', 'F. Scott Fitzgerald', 'https://example.com/gatsby.jpg', 'A story of wealth, love, and tragedy in 1920s America.', 4.1),
+  ('OL456M', 'Pride and Prejudice', 'Jane Austen', 'https://example.com/pride.jpg', 'A classic romance exploring class, family, and first impressions.', 4.6),
+  ('OL789M', 'The Hobbit', 'J.R.R. Tolkien', 'https://example.com/hobbit.jpg', 'Bilbo Baggins embarks on an unexpected adventure with dwarves.', 4.8),
+  ('OL101M', '1984', 'George Orwell', 'https://example.com/1984.jpg', 'A dystopian novel about totalitarianism and surveillance.', 4.4),
+  ('TEST1', 'Test', 'Test Author', 'https://example.com/test', 'A test book for testing tests', 0);
 
 -- =========================================
 -- USER_BOOK_LISTS
@@ -52,11 +52,11 @@ VALUES
 -- =========================================
 -- CLUBS
 -- =========================================
-INSERT INTO clubs (id, name, description, created_by)
+INSERT INTO clubs (name, description, created_by)
 VALUES
-  (1, 'Fantasy Enthusiasts', 'A group for fans of fantasy novels.', (SELECT id FROM users WHERE email='alice@example.com')),
-  (2, 'Classics Circle', 'Exploring literary classics together.', (SELECT id FROM users WHERE email='brian@example.com')),
-  (3, 'Dystopia Readers', 'Discussing the dark futures imagined by great authors.', (SELECT id FROM users WHERE email='chloe@example.com'));
+  ('Fantasy Enthusiasts', 'A group for fans of fantasy novels.', (SELECT id FROM users WHERE email='alice@example.com')),
+  ('Classics Circle', 'Exploring literary classics together.', (SELECT id FROM users WHERE email='brian@example.com')),
+  ('Dystopia Readers', 'Discussing the dark futures imagined by great authors.', (SELECT id FROM users WHERE email='chloe@example.com'));
 
 -- =========================================
 -- CLUB_MEMBERS

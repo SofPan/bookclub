@@ -2,21 +2,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const URL = `http://localhost:${process.env.HOST}/api/reviews/`;
-const TEST_UID = 6;
-const TEST_BOOK_ID= 5;
+const URL = `http://localhost:5500/api`;
+const TEST_ID = 1;
 
 export default function Home() {
 
   const handlePost = async() => {
     const reqValues = {
-      user_id: TEST_UID,
-      book_id: TEST_BOOK_ID,
-      rating: 4.5,
-      content: "Test book was so good!"
+      name: 'TEST NAME',
+      description: 'Test description',
+      created_by: TEST_ID,
     }
 
-    await axios.post(URL, reqValues)
+    await axios.post(`${URL}/clubs/`, reqValues)
       .then(response => {
         console.log(response);
       }).catch(error => {
@@ -26,11 +24,11 @@ export default function Home() {
 
   const handlePut = async() => {
       const reqValues = {
-        rating: 2,
-        content: "Actually, I didn't like it after all"
+        name: 'A whole new name',
+        description: 'A whole fantastic club to see'
       }
 
-      await axios.put(`http://localhost:5500/api/reviews/1`, reqValues)
+      await axios.put(`${URL}/clubs/1`, reqValues)
         .then(response => {
           console.log(response);
         }).catch(error => {
@@ -39,7 +37,7 @@ export default function Home() {
     };
 
   const handleDelete = async() => {
-    await axios.delete(`http://localhost:5500/api/reviews/1`)
+    await axios.delete(`${URL}/clubs/1`)
       .then(response => {
         console.log(response);
       }).catch(error => {

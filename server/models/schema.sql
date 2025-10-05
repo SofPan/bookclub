@@ -74,7 +74,7 @@ CREATE TABLE reviews (
 -- Represents book clubs/groups
 ------------------------------------------------------------
 CREATE TABLE clubs (
-    id SERIAL PRIMARY KEY ,
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT,
     created_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
