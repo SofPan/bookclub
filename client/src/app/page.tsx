@@ -12,7 +12,7 @@ export default function Home() {
       role: 'member'
     }
 
-    await axios.post(`${URL}/clubs/1/members/`, reqValues)
+    await axios.post(`${URL}/members/1/`, reqValues)
       .then(response => {
         console.log(response);
       }).catch(error => {
@@ -25,7 +25,7 @@ export default function Home() {
         role: 'admin'
       }
 
-      await axios.put(`${URL}/clubs/1/members/${TEST_ID}`, reqValues)
+      await axios.put(`${URL}/members/1/${TEST_ID}`, reqValues)
         .then(response => {
           console.log(response);
         }).catch(error => {
@@ -34,7 +34,7 @@ export default function Home() {
     };
 
   const handleDelete = async() => {
-    await axios.delete(`${URL}/clubs/1/members/${TEST_ID}`)
+    await axios.delete(`${URL}/members/1/${TEST_ID}`)
       .then(response => {
         console.log(response);
       }).catch(error => {
