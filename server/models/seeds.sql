@@ -1,14 +1,14 @@
 -- =========================================
 -- USERS
 -- =========================================
-INSERT INTO users (name, email, password_hash, avatar_url)
+INSERT INTO users (name, user_name, email, password_hash, avatar_url)
 VALUES
-  ('Alice Johnson', 'alice@example.com', 'hashed_pw_1', 'https://example.com/avatar1.png'),
-  ('Brian Smith', 'brian@example.com', 'hashed_pw_2', 'https://example.com/avatar2.png'),
-  ('Chloe Lee', 'chloe@example.com', 'hashed_pw_3', 'https://example.com/avatar3.png'),
-  ('Diego Ramirez', 'diego@example.com', 'hashed_pw_4', NULL),
-  ('Ella Thompson', 'ella@example.com', 'hashed_pw_5', NULL),
-  ('Test User', 'test@example.com', 'test_pw', 'https://example.com/test.png');
+  ('Alice Johnson', 'allieJohn', 'alice@example.com', 'hashed_pw_1', 'https://avatar.iran.liara.run/public'),
+  ('Brian Smith', 'bSmith', 'brian@example.com', 'hashed_pw_2', 'https://avatar.iran.liara.run/public'),
+  ('Chloe Lee', 'chloeoeoe', 'chloe@example.com', 'hashed_pw_3', 'https://avatar.iran.liara.run/public'),
+  ('Diego Ramirez', 'd_ramz', 'diego@example.com', 'hashed_pw_4', NULL),
+  ('Ella Thompson', 'e_t_phone_home','ella@example.com', 'hashed_pw_5', NULL),
+  ('Test User', 'its_a_test', 'test@example.com', 'test_pw', 'https://avatar.iran.liara.run/public');
 
 -- =========================================
 -- BOOKS
