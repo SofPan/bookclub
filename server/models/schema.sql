@@ -44,7 +44,10 @@ CREATE TABLE books (
 -- USER_BOOK_LISTS
 -- Tracks user's book lists (Want to Read / Currently Reading / Read)
 ------------------------------------------------------------
-CREATE TYPE book_list_type AS ENUM ('Want to Read', 'Currently Reading', 'Read');
+CREATE TYPE book_list_type AS ENUM (
+  'Want to Read', 
+  'Currently Reading', 
+  'Read');
 
 CREATE TABLE user_book_lists (
     id SERIAL PRIMARY KEY ,
