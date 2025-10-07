@@ -1,4 +1,4 @@
-import {AppDataSource} from '../../../../src/data-source.ts';
+import {AppDataSource} from '../../../src/data-source.ts';
 
 interface Member {
   club_id: string,

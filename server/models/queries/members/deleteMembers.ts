@@ -1,4 +1,4 @@
-import {AppDataSource} from '../../../../src/data-source.ts';
+import {AppDataSource} from '../../../src/data-source.ts';
 
 export const deleteMemberFromClub = (clubId:string, memberId:string) => {
   const query = `
@@ -8,5 +8,5 @@ export const deleteMemberFromClub = (clubId:string, memberId:string) => {
 
   return AppDataSource.query(query)
     .then(results => results)
-    .catch(error => console.error("Error getting one club", error));
+    .catch(error => console.error("Error removing member", error));
 }

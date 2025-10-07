@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 
-import {getAllClubMembers, getOneClubMember} from '../models/queries/clubs/members/getMembers.ts';
-import {addMemberToClub} from '../models/queries/clubs/members/postMembers.ts';
-import {updateClubMember} from '../models/queries/clubs/members/putMembers.ts';
-import {deleteMemberFromClub} from '../models/queries/clubs/members/deleteMembers.ts';
+import {getAllClubMembers, getOneClubMember} from '../models/queries/members/getMembers.ts';
+import {addMemberToClub} from '../models/queries/members/postMembers.ts';
+import {updateClubMember} from '../models/queries/members/putMembers.ts';
+import {deleteMemberFromClub} from '../models/queries/members/deleteMembers.ts';
 
 // Club Members API
 

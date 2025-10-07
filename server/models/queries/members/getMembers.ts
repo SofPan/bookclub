@@ -1,4 +1,4 @@
-import {AppDataSource} from '../../../../src/data-source.ts';
+import {AppDataSource} from '../../../src/data-source.ts';
 
 export const getAllClubMembers = (id:string) => {
   const query = `
