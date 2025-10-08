@@ -1,4 +1,7 @@
 import { Request, Response } from 'express';
+import {fetchFromOpenLibrary} from '../utils/openLibraryClient.ts';
+import {AppDataSource as db} from '../src/data-source.ts';
+
 
 import {getAllBooks, getOneBookById, getReviewsForOneBook} from '../models/queries/books/getBooks.ts';
 import {createNewBook} from '../models/queries/books/postBooks.ts';
@@ -19,11 +22,72 @@ export const getBooks = async (req: Request, res: Response) => {
 */
 export const getBookById = (req: Request, res: Response) => {
   const { id } = req.params;
+  
   getOneBookById(id)
   .then(book => {
     res.json(book);
   }).catch(error => console.error('Error in controller', error));
 };
+
+/*
+  Search DB for query text and pull from DB if record exists
+  Otherwise make API call to search for book then update DB
+*/
+
+export const queryBooks = async (req: Request, res: Response) => {
+  const {q} = req.query;
+
+  /*
+    Check if user query is already cached in DB
+  */ 
+  const cached = await db.query(`
+      SELECT * FROM books
+      WHERE title LIKE '%${q}%';
+    `);
+
+  if (cached.length){
+    return res.json(cached[0]);
+  }
+
+  const queryString = q?.toString();
+
+  /*
+    Run fetch request from external API
+    and capture necessary details
+  */ 
+  const externalSearch = await fetchFromOpenLibrary(queryString);
+  const details = externalSearch.docs[0];
+  const apiValues = [
+    details.key.replace('/works/', ''),
+    details.title,
+    details.author_name[0],
+    `https://covers.openlibrary.org/b/id/${details.cover_i}-M.jpg`,
+  ]
+
+  /*
+    Double check user selection is not in DB before 
+    caching a new record
+  */ 
+  const doubleCheckCached = await db.query(`
+      SELECT * FROM books
+      WHERE external_api_id=${apiValues[0]};
+    `);
+  
+  if (doubleCheckCached.length){
+    return res.json(doubleCheckCached[0]);
+  }
+
+  /*
+    Cache new record in DB to bring down external API load
+  */ 
+
+  await db.query(`
+      INSERT INTO books(external_api_id, title, author, cover_url)
+        VALUES ($1, $2, $3, $4);
+    `, apiValues);
+
+    return res.json(details);
+}
 
 /*
   GET reviews for a book

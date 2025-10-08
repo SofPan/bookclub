@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
+    "axios": "^1.12.2",
     "cors": "^2.8.5",
     "ts-node": "^10.9.2"
   }

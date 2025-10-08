@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS api_usage_logs;
 DROP TABLE IF EXISTS meetings;
 DROP TABLE IF EXISTS club_members;
 DROP TABLE IF EXISTS clubs;
@@ -112,4 +113,16 @@ CREATE TABLE meetings (
     scheduled_at TIMESTAMP NOT NULL,
     created_by INTEGER REFERENCES users(id) ON DELETE SET NULL,
     created_at TIMESTAMP DEFAULT NOW()
+);
+
+------------------------------------------------------------
+-- API_USAGE_LOGS
+-- Log of External API calls for volume/query tracking
+------------------------------------------------------------
+CREATE TABLE api_usage_logs (
+  id SERIAL PRIMARY KEY,
+  endpoint TEXT NOT NULL,
+  status_code INT,
+  response_time_ms INT,
+  requested_at TIMESTAMP DEFAULT NOW()
 );
