@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import axios from "axios";
 import {AppDataSource as db} from '../src/data-source.ts';
 
@@ -8,7 +9,7 @@ export async function fetchFromOpenLibrary(endpoint: string | undefined) {
   const start = Date.now();
   const res = await axios.get(url, {
     headers: {
-      "User-Agent": "YourAppName/1.0 (contact@example.com)"
+      "User-Agent": `LitLounge/1.0 ${process.env.EMAIL}`
     }
   });
 
