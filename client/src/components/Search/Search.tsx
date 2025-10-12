@@ -1,16 +1,10 @@
 import { useEffect, useState } from "react";
+import type { Book } from "@/types/Book";
 
-interface Result {
-  id: number,
-  external_api_id: string,
-  title: string,
-  author: string,
-  cover_url: string,
-  synopsis: string,
-  avg_rating: number
-}
+import BookList from "../BookList/BookList";
 
-const DUMMY_DATA:Result[] = [
+
+const DUMMY_DATA:Book[] = [
   {
     id: 1,
     external_api_id: "TEST1",
@@ -47,8 +41,8 @@ const Search = () => {
 
   const [render, setRender] = useState(false);  
   
+  const [searchResults, setSearchResults] = useState<Book[]>([])
   /*
-    Render the results as a list
     When user clicks on a result, for now render it to the side (later will have its own page to add to user list, see reviews, etc)
   */
   useEffect(() => {
@@ -73,7 +67,9 @@ const Search = () => {
   useEffect(() => {
     if (debouncedQuery) {
       // This code will run only after the user stops typing for the specified delay
+      setSearchResults(filterSearch(DUMMY_DATA, debouncedQuery));
       setRender(true);
+
     }
 
   }, [debouncedQuery])
@@ -86,18 +82,11 @@ const Search = () => {
     e.preventDefault();
     return;
   }
-
-  const mapAndFilter = (arr:Result[], searchQuery:string) => {
-    return arr.filter((result:Result) => {
-      return result.title.toLowerCase().includes(searchQuery.toLowerCase());
-    }).map((result:Result) => {
-      return <li key={result.id}>
-        Title: {result.title} | Rating: {result.avg_rating} <br />
-        Author: {result.author} <br />
-        Synopsis: {result.synopsis}
-        <img src={result.cover_url} alt={result.title} />
-      </li>
-    })
+  // TODO: This will eventually be removed and handled by the backend
+  const filterSearch = (arr:Book[], searchQuery:string) => {
+    return arr.filter((book:Book) => {
+      return book.title.toLowerCase().includes(searchQuery.toLowerCase());
+    });
   }
 
   return(
@@ -106,9 +95,9 @@ const Search = () => {
         <label>Search</label>
         <input onChange={handleChange} type="text" value={searchText}></input>
       </form>
-      <ul>
-        {render && mapAndFilter(DUMMY_DATA, debouncedQuery)}
-      </ul>
+      <div>
+        {render && <BookList bookData={searchResults} />}
+      </div>
     </div>
   )
 }
