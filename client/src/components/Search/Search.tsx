@@ -96,7 +96,7 @@ const Search = () => {
   }
 
   return(
-    <div>
+    <div className="w-1/3">
       <div>
         <form onSubmit={handleSubmit}>
           <label>Search</label>
