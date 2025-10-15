@@ -91,10 +91,12 @@ const Search = () => {
 
   return(
     <div>
-      <form onSubmit={handleSubmit}>
-        <label>Search</label>
-        <input onChange={handleChange} type="text" value={searchText}></input>
-      </form>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <label>Search</label>
+          <input onChange={handleChange} type="text" value={searchText}></input>
+        </form>
+      </div>
       <div>
         {render && <BookList bookData={searchResults} />}
       </div>
