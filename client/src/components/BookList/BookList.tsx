@@ -6,7 +6,6 @@ interface ComponentProps {
 }
 
 const BookList = ({bookData}:ComponentProps) => {
-  
   const mapBooks = bookData.map((book:Book) => {
       return <BookListItem
         key={book.id}

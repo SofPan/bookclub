@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Book } from "@/types/Book";
+import { queryBooks } from "@/api/bookRequests";
 
 import BookList from "../BookList/BookList";
 
@@ -65,9 +66,14 @@ const Search = () => {
 
 
   useEffect(() => {
+    const searchData = async (queryText:string) => {
+      const results = await queryBooks(queryText)
+      setSearchResults(results);
+    };
     if (debouncedQuery) {
       // This code will run only after the user stops typing for the specified delay
-      setSearchResults(filterSearch(DUMMY_DATA, debouncedQuery));
+      // setSearchResults(filterSearch(DUMMY_DATA, debouncedQuery));
+      searchData(debouncedQuery);
       setRender(true);
 
     }
