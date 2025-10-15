@@ -1,16 +1,23 @@
+import { cacheBook } from "@/api/bookRequests"
 import type { Book } from "@/types/Book"
 
 interface ComponentProps {
-  book: Book
+  book: Book,
+  hideRender: () => void
 }
 
-const BookListItem = ({book}:ComponentProps) => {
+const BookListItem = ({book, hideRender}:ComponentProps) => {
+
+  const cacheAndRender = async () => {
+    await cacheBook(book);
+    hideRender();
+  }
+
   return(
-    <li className="flex justify-between mb-6 mt-6">
+    <li onClick={cacheAndRender} className="flex justify-between mb-6 mt-6 hover:cursor-pointer">
       <div className="w-75">
-        Title: {book.title} | Rating: {book.avg_rating} <br />
-        Author: {book.author} <br />
-        Synopsis: {book.synopsis}
+        {book.title} | {book.avg_rating | 0} <br />
+        {book.author}
       </div>
       <div className="w-25">
         <img src={book.cover_url} alt={book.title} className="w-10 h-15 cover"/>

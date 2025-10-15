@@ -66,14 +66,12 @@ export const queryBooks = async (req: Request, res: Response) => {
 }
 
   const changeExternalToInternalKeys = (book:ExternalBook) => {
-    console.log("inside translator", book);
     const newBook = {
       external_api_id: book.key.replace('/works/', ''),
       title: book.title,
       author: book.author_name[0],
       cover_url: `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`,
     }
-    console.log("newBook", newBook);
     return newBook;
   }
 
@@ -102,7 +100,6 @@ export const queryBooks = async (req: Request, res: Response) => {
   //     INSERT INTO books(external_api_id, title, author, cover_url)
   //       VALUES ($1, $2, $3, $4);
   //   `, apiValues);
-  console.log("changeBooks", changeBooks);
     return res.json(changeBooks);
 }
 
@@ -119,11 +116,21 @@ export const getBookReviews = (req: Request, res: Response) => {
 /*
   POST book to DB
 */ 
-export const createBook = (req: Request, res: Response) => {
+export const createBook = async (req: Request, res: Response) => {
   const bookValues = req.body;
+  // If book exists on DB, do not create a new record
+  const cached = await db.query(`
+      SELECT * FROM books
+      WHERE external_api_id='${bookValues.external_api_id}';
+    `);
+
+  if (cached.length){
+    return res.status(200);
+  }
+
   createNewBook(bookValues)
   .then(() => {
-    res.status(201).json();
+    return res.status(201).json();
   }).catch(error => console.error("Error createBook", error));
 };
 

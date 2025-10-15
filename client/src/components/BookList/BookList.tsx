@@ -2,19 +2,21 @@ import type { Book } from "@/types/Book"
 import BookListItem from "./BookListItem"
 
 interface ComponentProps {
-  bookData: Book[]
+  bookData: Book[],
+  hideRender: () => void
 }
 
-const BookList = ({bookData}:ComponentProps) => {
+const BookList = ({bookData, hideRender}:ComponentProps) => {
   const mapBooks = bookData.map((book:Book) => {
       return <BookListItem
-        key={book.id}
+        key={book.external_api_id}
         book={book}
+        hideRender={hideRender}
       />
     })
   
   return(
-    <ul>
+    <ul className="absolute">
       {mapBooks}
     </ul>
   )

@@ -72,7 +72,6 @@ const Search = () => {
     };
     if (debouncedQuery) {
       // This code will run only after the user stops typing for the specified delay
-      // setSearchResults(filterSearch(DUMMY_DATA, debouncedQuery));
       searchData(debouncedQuery);
       setRender(true);
 
@@ -88,11 +87,12 @@ const Search = () => {
     e.preventDefault();
     return;
   }
-  // TODO: This will eventually be removed and handled by the backend
-  const filterSearch = (arr:Book[], searchQuery:string) => {
-    return arr.filter((book:Book) => {
-      return book.title.toLowerCase().includes(searchQuery.toLowerCase());
-    });
+
+  // When search item clicked, hide results list component and reset search
+  const hideRender = () => {
+    setRender(false);
+    setSearchText("");
+    setSearchResults([]);
   }
 
   return(
@@ -103,8 +103,8 @@ const Search = () => {
           <input onChange={handleChange} type="text" value={searchText}></input>
         </form>
       </div>
-      <div>
-        {render && <BookList bookData={searchResults} />}
+      <div className="relative">
+        {render && <BookList bookData={searchResults} hideRender={hideRender} />}
       </div>
     </div>
   )
